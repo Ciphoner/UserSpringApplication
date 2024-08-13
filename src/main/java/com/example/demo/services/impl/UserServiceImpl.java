@@ -1,7 +1,9 @@
 package com.example.demo.services.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,8 @@ public class UserServiceImpl implements UserService {
             if(userRepository.findByEmail(userDto.getEmail())){
                 throw new RuntimeException("Email already exists");
             }
-            return userRepository.save(userDto);
+            User user=new User(userDto.getNom(),userDto.getAge(),userDto.getSexe(), userDto.getEmail());
+            return userRepository.save(user);
     }
 
     @Override
@@ -48,12 +51,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List <User> getAllMinerGirls() {
-        return userRepository.findByAgeUnderEighteen();
+        return userRepository.findBySexe(SexeEnum.FEMININ).stream().filter(u->{
+            return u.getAge()>=18;
+        }).collect(Collectors.toList());
     }
 
     @Override
     public List <User> getAllBoys() {
-        return userRepository.findAllBoy();
+        return userRepository.findAll().stream().filter(u->{
+            return u.getSexe().equals(SexeEnum.MASCULIN);
+        }).collect(Collectors.toList());
     }
    
 

@@ -26,11 +26,10 @@ public class UserController {
 
     @PostMapping("/create")
     public User create(@RequestBody UserDto userDto) {
-
-        return null;
+        return userService.create(userDto);
     }
 
-    @GetMapping("/searchNomuserRepository.findByNom(nom);/{nom}")
+    @GetMapping("/searchNom/{nom}")
     public List<User> findByNom(@PathVariable("nom")  String nom) {
         return userService.findByNom(nom);
     }
@@ -47,12 +46,13 @@ public class UserController {
         return userService.getAll();
     }
 
+    @GetMapping("/listMinerGirls")
     public List<User> getAllMinerGirls() {
-        return null;
+        return userService.getAllMinerGirls();
     }
-
+    @GetMapping("/listBoys")
     public List<User> getAllBoys() {
-        return null;
+        return userService.getAllBoys();
     }
 
 }
