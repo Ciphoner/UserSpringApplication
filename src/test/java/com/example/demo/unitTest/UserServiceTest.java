@@ -36,9 +36,10 @@ class UserServiceTest {
         ArgumentCaptor<User> captor=ArgumentCaptor.forClass((User.class));
 
         //given(parametre qu'on a)
-        User u=new User("norvan",20,SexeEnum.MASCULIN,"norvan@gmail.com");
+        //User u=new User("norvan",20,SexeEnum.MASCULIN,"norvan@gmail.com");
 
        when(userRepository.save(any (User.class))).thenReturn(new User("norvan",20,SexeEnum.MASCULIN,"norvan@gmail.com"));
+       
 
         //when (lorsqu'on fait l'appel de la fonction à tester)
        // User user=userService.create(u);
